@@ -1,0 +1,264 @@
+@font-face {
+    font-family: roboto;
+    src: url(../font/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: allerta;
+    src: url(../font/allerta_medium.otf);
+}
+
+.headerContainer {
+    position: relative;
+    width: 100%;
+    height: 6rem;
+    background-color: #0a1426;
+    display: inline-flex;
+    flex-direction: row;
+    column-gap: 14rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoImg {
+    width: 10rem;
+    height: 4rem;
+}
+
+.headerOptionsDiv {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5rem;
+}
+
+.option {
+    color: #ffff;
+    transition: color 0.2s;
+    cursor: pointer;
+    font-family: roboto;
+
+}
+
+.option:hover {
+    color: #26c492;
+}
+
+.headerBtnDiv {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginBtn {
+    background-color: #26c492;
+    height: 3rem;
+    transition: color 0.2s, background-color 0.2s;
+    font-family: roboto;
+}
+
+.loginBtn:hover {
+    background-color: #ffff;
+    color: #0a1426;
+}
+
+.signinBtn {
+    background-color: #ffff;
+    color: #0a1426;
+    height: 3rem;
+    transition: color 0.2s, background-color 0.2s;
+    font-family: roboto;
+}
+
+.signinBtn:hover {
+    background-color: #26c492;
+    color: #ffff;
+}
+.noneBtn{
+    display: none;
+}
+.blockBtn{
+    display: block;
+}
+.blockIcon{
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #ffff;
+    transition: color 0.2s;
+}
+.blockIcon:hover{
+    color: #26c492;
+}
+.noneIcon{
+    display: none;
+}
+.headerResponsiveDiv {
+    display: none;
+}
+
+.asv{
+    color: white;
+}
+a {
+    text-decoration-line: none;
+}
+.hamburger {
+    cursor: pointer;
+}
+
+.hamburger input {
+    display: none;
+}
+
+.hamburger svg {
+    /* The size of the SVG defines the overall size */
+    height: 3em;
+    /* Define the transition for transforming the SVG */
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+    fill: none;
+    stroke: white;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    /* Define the transition for transforming the Stroke */
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+    stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked+svg {
+    transform: rotate(-45deg);
+}
+
+.hamburger input:checked+svg .line-top-bottom {
+    stroke-dasharray: 20 300;
+    stroke-dashoffset: -32.42;
+}
+
+.responsiveMenuDiv{
+    display: none;
+    width: 100%;
+    background-color: #26c492;
+    top: 6rem;
+    position: absolute;
+}
+.responsiveMenuList{
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.responsiveOption{
+    list-style-type: none;
+    font-family: roboto;
+    color: #ffff;
+    width: 100%;
+    font-size: 1.1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid #0a1426;
+}
+.responsiveOptionL{
+    list-style-type: none;
+    font-family: roboto;
+    color: #ffff;
+    width: 100%;
+    font-size: 1.1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid #0a1426;
+}
+.responsiveOptionS{
+    list-style-type: none;
+    font-family: roboto;
+    color: #ffff;
+    width: 100%;
+    font-size: 1.1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    border-bottom: 1px solid #0a1426;
+}
+
+
+
+@media screen and (max-width:1500px) {
+    .headerContainer {
+        column-gap: 10rem;
+    }
+}
+
+@media screen and (max-width:1200px) {
+    .headerContainer {
+        column-gap: 8rem;
+    }
+
+    .headerOptionsDiv {
+        column-gap: 3.5rem;
+    }
+
+    .option {
+        font-size: 0.8rem;
+    }
+}
+
+
+@media screen and (max-width:992px) {
+    .headerOptionsDiv{
+        display: none;
+    }
+   
+    .headerResponsiveDiv{
+        display: block;
+    }
+    .headerContainer {
+        column-gap: 12rem;
+    }
+    .responsiveOptionL{
+        display: none;
+    }
+    .responsiveOptionS{
+        display: none;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .headerOptionsDiv{
+        display: none;
+    }
+   
+    .headerResponsiveDiv{
+        display: block;
+    }
+    .headerContainer {
+        column-gap: 7rem;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .headerOptionsDiv{
+        display: none;
+    }
+    .headerBtnDiv{
+        display: none;
+    }
+    .headerResponsiveDiv{
+        display: block;
+    }
+    .headerContainer {
+        column-gap: 7rem;
+    }
+}
+
+@media screen and (max-width:410px) {}

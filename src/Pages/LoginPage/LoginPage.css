@@ -1,0 +1,272 @@
+@font-face {
+    font-family: allerta;
+    src: url(../font/allerta_medium.otf);
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(../font/Roboto-Medium.ttf);
+}
+
+.loginMain {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.loginHeader {
+    font-family: roboto;
+}
+
+.animation {
+    width: 25rem;
+    height: 25rem;
+}
+
+.loginDesDiv {
+    width: 100%;
+    display: flex;
+    column-gap: 0.5rem;
+    align-items: center;
+    padding-left: 10rem;
+}
+
+.loginDescriptions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2.5rem;
+}
+
+.loginDes {
+    width: 25rem;
+    font-family: allerta;
+}
+
+
+
+.animated-text-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+}
+
+.animated-text {
+    font-family: allerta;
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.slide-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.loginDiv {
+    width: 40rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+    background-color: #DCF6F3;
+    box-shadow: 8px 8px 31px -10px rgba(66, 68, 90, 1);
+    border-radius: 10px;
+}
+.loginDiv2{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+}
+.formNone{
+    display: none;
+}
+.formBlock{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+}
+.logSignBtnsDiv {
+    width: 100%;
+}
+
+.notLoginSelect {
+    width: 50%;
+    height: 3rem;
+    font-family: roboto;
+    background: linear-gradient(to left, #DCF6F3 50%, #0a1426 50%) right;
+    background-size: 200% 100%;
+    transition: .5s ease-out;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.notLoginSelect:hover {
+    background-position: left;
+    color: #ffff;
+}
+
+.loginSelect {
+    width: 50%;
+    height: 3rem;
+    font-family: roboto;
+    background-color: #0a1426;
+    color: #ffff;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.notSignInSelect {
+    width: 50%;
+    height: 3rem;
+    font-family: roboto;
+    background: linear-gradient(to left, #DCF6F3 50%, #26c492 50%) right;
+    background-size: 200% 100%;
+    transition: .5s ease-out;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.notSignInSelect:hover {
+    background-position: left;
+}
+
+.signInSelect {
+    width: 50%;
+    height: 3rem;
+    font-family: roboto;
+    background-color: #26c492;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.loginSignImgDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1rem;
+}
+.loginNotSucces{
+    display: none;
+}
+.loginSuccess{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1rem;
+}
+
+.animationTxt {
+    font-size: 1.2rem;
+    font-family: roboto;
+    font-weight: bold;
+}
+
+.profileAnim {
+    width: 7rem;
+    height: 7rem;
+}
+.notLoginForm{
+    display: none;
+}
+.loginForm {
+    display: block;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2rem;
+}
+
+.inputsDiv {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+}
+
+.textInput {
+    width: 100%;
+    height: 2.5rem;
+    border: 0px solid rgba(0, 0, 0, 0.205);
+    border-radius: 5px;
+    background-color: #ffff;
+    padding-left: 1rem;
+}
+
+.userNameFalse {
+    display: block;
+    color: red;
+    font-family: allerta;
+    font-size: 0.9rem;
+}
+
+.userNameTrue {
+    display: none;
+}
+
+.emailFalse {
+    display: block;
+    color: red;
+    font-family: allerta;
+    font-size: 0.9rem;
+}
+
+.emailTrue {
+    display: none;
+}
+
+.passwordFalse {
+    display: block;
+    color: red;
+    font-family: allerta;
+    font-size: 0.9rem;
+}
+
+.passwordTrue {
+    display: none;
+}
+
+.submitBtn {
+    width: 70%;
+    height: 2.5rem;
+    background-color: #26c492;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.btntbtn{
+    width: 12rem;
+    height: 12rem;
+}
+
+.notSignInForm {
+    display: none;
+}
+
+.signInForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 2rem;
+}
