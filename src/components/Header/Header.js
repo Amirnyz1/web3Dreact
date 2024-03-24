@@ -5,6 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import './Header.css'
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { clickProfile } from '../../redux/reducers/dataReducer/dataReducer';
 import { useState } from 'react';
 
 
@@ -18,6 +19,7 @@ const Header = () => {
         setIsBlock(!isblock)
     }
     const dataList = useSelector((state) => state.data.isLoggedIn);   
+
 
     return (
         <div className='headerContainer'>
