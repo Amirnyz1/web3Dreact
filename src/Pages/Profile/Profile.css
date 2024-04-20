@@ -157,10 +157,47 @@
     font-family: allerta;
     border: 1px solid #26c492;
     border-radius: 5px;
-    transition: background-color 0.2s , color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .bioSubBtn:hover {
     background-color: #0a1426;
     color: #fff;
+}
+
+
+
+
+
+/* responsive codes */
+
+
+@media screen and (max-width:1500px) {}
+
+@media screen and (max-width:1200px) {}
+
+
+@media screen and (max-width:992px) {}
+
+@media screen and (max-width:768px) {
+    .profileDetails {
+        width: 90%;
+    }
+}
+
+
+@media screen and (max-width:600px) {}
+
+@media screen and (max-width:446px) {
+    .fixedInformation {
+        column-gap: 1rem;
+    }
+
+    .fixedInformationHeader {
+        font-size: 0.9rem;
+    }
+
+    .fixedInformationValue{
+        font-size: 0.8rem;
+    }
 }

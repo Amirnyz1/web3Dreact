@@ -192,6 +192,7 @@
 }
 .starIcon{
     font-size: 2rem;
+    cursor: pointer;
 }
 .coinPricesDiv{
     display: flex;

@@ -193,6 +193,135 @@ a {
 
 
 
+
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.dashboardContainer {
+    max-width: 0;
+    min-width: 0;
+    z-index: 1;
+    position: fixed;
+    list-style-type: none;
+    overflow: hidden;
+    transition: min-width 0.3s ease-out;
+    top: 10rem;
+    left: 3rem;
+    padding-top: 2rem;
+    background-color: #DCF6F3;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+}
+
+.dashboardContainer.open{
+    min-width: 25rem;
+    
+}
+
+.profileSection {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    padding-left: 2rem;
+}
+
+.proUserNameDiv {
+    display: flex;
+    column-gap: 1rem;
+}
+
+.profileImg {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+
+
+.userNameEmailDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.userNameSpan {
+    font-size: 1.1rem;
+    font-family: roboto;
+}
+
+.emailSpan {
+    font-size: 0.9rem;
+    opacity: 80%;
+    font-family: allerta;
+}
+
+.bioDiv {
+    display: flex;
+    justify-content: start;
+}
+
+.bioSpan {
+    font-family: allerta;
+    font-size: 1rem;
+    opacity: 90%;
+}
+
+.profileOptionsList {
+    list-style-type: none;
+    padding-left: 0rem;
+    margin-bottom: 0;
+}
+
+.profileOption {
+    width: 100%;
+    height: 4rem;
+    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+    column-gap: 0.8rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.299);
+    cursor: pointer;
+}
+
+.profileIcons {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.options {
+    font-size: 1rem;
+    font-family: roboto;
+}
+
+.profile {
+    background-color: #26c492;
+    color: #DCF6F3;
+}
+
+.active {
+    background-color: #26c492;
+    color: #DCF6F3;
+}
+
+.notes{
+    background-color: #26c492;
+    color: #DCF6F3;
+}
+
+
+
+
+
+
+
+
+
+
+/* responsive codes */
+
 @media screen and (max-width:1500px) {
     .headerContainer {
         column-gap: 10rem;

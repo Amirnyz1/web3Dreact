@@ -3,10 +3,12 @@ import { GiNotebook } from "react-icons/gi";
 import { MdFavorite } from "react-icons/md";
 import { FaWallet } from "react-icons/fa";
 import { AiOutlineTransaction } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import './Dashboard.css'
 import { clickProfile } from "../../redux/reducers/dataReducer/dataReducer";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { add1 } from "../../redux/reducers/notesData/notesData";
 
 
 const Dashboard = () => {
@@ -17,11 +19,12 @@ const Dashboard = () => {
     const profilePhoto = useSelector((state) => state.data.profilePhoto)
 
     const [activeOption, setActiveOption] = useState("profile");
-    
+
 
     const handleClick = (option) => {
         setActiveOption(option);
     };
+
 
 
     return (
@@ -40,42 +43,26 @@ const Dashboard = () => {
                     <span className="bioSpan">{bio}</span>
                 </div>
             </div>
-            {/* <ul className='profileOptionsList'>
-                <li className='profileOption' onClick={clickPro}>
-                    <CgProfile className="profileIcons" />
-                    <span className='options' id="test" value='mohammad'>Profile</span>
-                </li>
-                <li className='profileOption' onClick={clickNote}>
-                    <GiNotebook className="profileIcons" />
-                    <span className='options'>Notes</span>
-                </li>
-                <li className='profileOption' onClick={clickFavorite}>
-                    <MdFavorite className="profileIcons"  />
-                    <span className='options'>Favorite Coins</span>
-                </li>
-                <li className='profileOption' onClick={clickWall}>
-                    <FaWallet className="profileIcons" />
-                    <span className='options'>Wallet</span>
-                </li>
-                <li className='profileOption' onClick={clickTran}>
-                    <AiOutlineTransaction className="profileIcons" />
-                    <span className='options'>Transactions</span>
-                </li>
-            </ul> */}
 
             <ul className='profileOptionsList'>
-                <li className={`profileOption ${activeOption === 'profile' && 'active'}`} onClick={() => handleClick('profile')}>
-                    <CgProfile className="profileIcons" />
-                    <span className='options'>Profile</span>
-                </li>
-                <li className={`profileOption ${activeOption === 'notes' && 'active'}`} onClick={() => handleClick('notes')}>
-                    <GiNotebook className="profileIcons" />
-                    <span className='options'>Notes</span>
-                </li>
-                <li className={`profileOption ${activeOption === 'favoriteCoins' && 'active'}`} onClick={() => handleClick('favoriteCoins')}>
-                    <MdFavorite className="profileIcons" />
-                    <span className='options'>Favorite Coins</span>
-                </li>
+                <Link to="/Profile">
+                    <li className={`profileOption ${activeOption === 'profile' && 'active'}`} onClick={() => handleClick('profile')}>
+                        <CgProfile className="profileIcons" />
+                        <span className='options'>Profile</span>
+                    </li>
+                </Link>
+                <Link to="/Notes">
+                    <li className={`profileOption ${activeOption === 'notes' && 'active'}`} onClick={() => handleClick('notes')}>
+                        <GiNotebook className="profileIcons" />
+                        <span className='options'>Notes</span>
+                    </li>
+                </Link>
+                <Link to='/FavoriteCoins'>
+                    <li className={`profileOption ${activeOption === 'favoriteCoins' && 'active'}`} onClick={() => handleClick('favoriteCoins')}>
+                        <MdFavorite className="profileIcons" />
+                        <span className='options'>Favorite Coins</span>
+                    </li>
+                </Link>
                 <li className={`profileOption ${activeOption === 'wallet' && 'active'}`} onClick={() => handleClick('wallet')}>
                     <FaWallet className="profileIcons" />
                     <span className='options'>Wallet</span>

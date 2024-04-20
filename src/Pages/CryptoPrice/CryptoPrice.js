@@ -5,8 +5,9 @@ import { CiStar } from "react-icons/ci";
 import axios from 'axios';
 import './CryptoPrice.css'
 import { useEffect, useState } from 'react';
-import { addC } from '../../redux/reducers/dataReducer/dataReducer';
-
+import { UseDispatch, useDispatch } from "react-redux";
+import { addCoin } from "../../redux/reducers/notesData/notesData";
+import { coinsD } from "../../redux/reducers/dataReducer/dataReducer";
 
 function CryptoPrice() {
 
@@ -64,6 +65,30 @@ function CryptoPrice() {
     });
 
 
+    const dispatch = useDispatch();
+
+    function clickCoinStar(item) {
+        dispatch(addCoin({
+            coin: {
+                key: Date.now(),
+                coinName: item.coinName,
+                price: item.price,
+                changeP: item.changeP,
+                marketCap: item.marketCap
+            }
+        }))
+    }
+
+
+    console.log(setApi)
+
+
+   
+
+    useEffect(()=>{
+        dispatch(coinsD({ coinsDatas: setApi }))
+    })
+
 
 
 
@@ -117,7 +142,7 @@ function CryptoPrice() {
                                 <div className='coinBox' key={item.coinName}>
                                     <div className='iconNameDiv'>
                                         <div className='starIconDiv'>
-                                            <CiStar className='starIcon' />
+                                            <CiStar className='starIcon' onClick={() => clickCoinStar(item)} />
                                         </div>
                                         <div className='coinNumNameDiv'>
                                             <span className='coinNum'>{item.coinNum}</span>
@@ -135,7 +160,7 @@ function CryptoPrice() {
                                 </div>
                             )
                         })}
-
+                        
                     </div>
                 </div>
             </div>

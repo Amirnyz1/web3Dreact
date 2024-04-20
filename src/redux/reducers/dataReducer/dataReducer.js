@@ -6,7 +6,8 @@ const init = {
     email: "",
     profilePhoto: "",
     bio: "",
-    option: ""
+    option: "",
+    coinsDatas : []
 }
 
 const dataReducer = createSlice({
@@ -26,11 +27,11 @@ const dataReducer = createSlice({
         addBio: (state, action) => {
             state.bio = action.payload.bio
         },
-        clickProfile: (state, action) => {
-            state.option = action.payload.profile
+        coinsD : (state, action) => {
+            state.coinsDatas = action.payload.coinsDatas
         }
     }
 })
 
-export const { add, addProfile, addBio, clickProfile } = dataReducer.actions
+export const { add, addProfile, addBio, coinsD } = dataReducer.actions
 export default dataReducer.reducer

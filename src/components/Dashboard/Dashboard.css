@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
     font-family: roboto;
     src: url(../font/Roboto-Medium.ttf);
 }
@@ -8,10 +8,14 @@
     src: url(../font/allerta_medium.otf);
 }
 
+a {
+    color: black;
+    text-decoration: none;
+}
+
 .dashboardContainer {
     width: 25rem;
     padding-top: 2rem;
-    padding-bottom: 2rem;
     background-color: #DCF6F3;
     border-radius: 10px;
     display: flex;
@@ -91,6 +95,17 @@
     font-family: roboto;
 }
 
-.active {
-    background-color: #26c492;color: #DCF6F3;
+.profile {
+    background-color: #26c492;
+    color: #DCF6F3;
 }
+
+.active {
+    background-color: #26c492;
+    color: #DCF6F3;
+}
+
+.notes{
+    background-color: #26c492;
+    color: #DCF6F3;
+} */
