@@ -35,9 +35,11 @@ function CryptoPrice() {
         setSortingMode(btnNum);
     }
 
+   
+
+
     function sortData(data, mode) {
         const coinsArray = Object.entries(data);
-
         if (mode === 1) {
             // Sort the array based on USD value
             coinsArray.sort((a, b) => b[1].usd - a[1].usd);
@@ -51,6 +53,8 @@ function CryptoPrice() {
         return Object.fromEntries(coinsArray);
     }
 
+    
+
     const setApi = Object.keys(coinsData).map((key, index) => {
         const price = coinsData[key].usd;
         const marketCap = coinsData[key].usd_market_cap;
@@ -62,7 +66,7 @@ function CryptoPrice() {
             marketCap: marketCap.toFixed(0),
             changeP: changeP,
         };
-    });
+    }); 
 
 
     const dispatch = useDispatch();
@@ -80,7 +84,6 @@ function CryptoPrice() {
     }
 
 
-    console.log(setApi)
 
 
    
@@ -88,6 +91,10 @@ function CryptoPrice() {
     useEffect(()=>{
         dispatch(coinsD({ coinsDatas: setApi }))
     })
+
+
+
+
 
 
 

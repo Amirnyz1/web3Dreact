@@ -1,108 +1,82 @@
 import Header from "../../components/Header/Header"
 import Footer from "../../components/Footer/Footer"
 import Dashboard from "../../components/Dashboard/Dashboard"
-import { UseSelector, useSelector } from "react-redux"
+import { UseSelector, useDispatch, useSelector } from "react-redux"
 import "./FavoriteCoins.css"
 import { useState } from "react"
+import { addOrder } from "../../redux/reducers/notesData/notesData"
 
 const FavoriteCoins = () => {
 
   const coinDatas = useSelector((state) => state.noteD.coin)
-  const coinsD = useSelector((state) => state.data.coinsDatas)
-
-
-  // console.log(coinDatas)
-
-
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [coinNameValue, setCoinNameValue] = useState("");
+  const dispatch = useDispatch()
+  const orderDatas = useSelector((state) => state.noteD.ordersData)
 
-  // Function to handle search input change
+  // Get coins data from Redux state
+  const coinsData = useSelector((state) => state.data.coinsDatas);
+  console.log(coinsData)
+  // Function to handle search input change 
+  
   const handleSearchChange = (event) => {
     const { value } = event.target;
     setSearchQuery(value);
-  
-    // Ensure dataaa is not undefined before filtering
-    if (Array.isArray(coinsD)) {
-      // Filter dataaa based on search query
-      const filteredResults = coinsD.filter((item) =>
-        item.name.toLowerCase().includes(value.toLowerCase())
+
+    // Filter data based on search query
+    if (Array.isArray(coinsData)) {
+      const filteredResults = coinsData.filter((coin) =>
+        coin.coinName && typeof coin.coinName === 'string' &&
+        coin.coinName.toLowerCase().includes(value.toLowerCase())
       );
       setSearchResults(filteredResults);
     } else {
-      // Handle case where dataaa is not an array
       setSearchResults([]);
     }
+
+    if (value === "") {
+      setSearchResults([])
+    }
+
   };
 
-
-
-
-
   const [disablePrice, setDisablePrice] = useState(false);
-  const [disableMarket, setDisableMarket] = useState(false);
-  const [disableChange, setDisableChange] = useState(false);
-  const [coinNameValue, setCoinNameValue] = useState("");
   const [priceValue, setPriceValue] = useState("");
-  const [marketCapValue, setMarketCapValue] = useState("");
-  const [changeValue, setChangeValue] = useState("");
   const [lastValue, setLastValue] = useState()
+  const [submitBtn, setSubmitBtn] = useState(false);
+  const [registerBtn, setRegisterBtn] = useState(true);
+  const [orderD, setOrderD] = useState([])
 
   const handlePriceInput = (event) => {
     const { value } = event.target;
     setPriceValue(value);
-    setLastValue(value)
-
-
-    if (value === "") {
-      setDisableMarket(false);
-      setDisableChange(false);
-    } else {
-      setDisableMarket(true);
-      setDisableChange(true);
-    }
+    setLastValue(parseFloat(priceValue))
   };
-
-  const handleMarketInput = (event) => {
-    const { value } = event.target;
-    setMarketCapValue(value);
-    setLastValue(value)
-
-    if (value === "") {
-      setDisablePrice(false);
-      setDisableChange(false);
-    } else {
-      setDisablePrice(true);
-      setDisableChange(true);
-    }
-  };
-
-  const handleChangeInput = (event) => {
-    const { value } = event.target;
-    setChangeValue(value);
-    setLastValue(value)
-
-    if (value === "") {
-      setDisablePrice(false);
-      setDisableMarket(false);
-    } else {
-      setDisablePrice(true);
-      setDisableMarket(true);
-    }
-  };
-
-  console.log(priceValue)
-
 
   function getValue() {
-    console.log(lastValue)
+    setSubmitBtn(true);
+    setRegisterBtn(false)
+    setOrderD(prevOrder => [...prevOrder, {
+      orderName: searchQuery,
+      orderPrice: priceValue
+    }])
   }
 
-
-  function getDatas() {
-
+  function getDatas(e) {
+    e.preventDefault();
+    dispatch(addOrder({ order: orderD }))
+    setSubmitBtn(false);
+    setRegisterBtn(true)
   }
 
+  function getCoinName(item) {
+    setSearchQuery(item.coinName)
+  }
+
+  function noSubmitOrder() {
+    setSubmitBtn(false)
+  }
 
 
   return (
@@ -154,15 +128,14 @@ const FavoriteCoins = () => {
                 <input
                   className="getOrderCoinName"
                   value={searchQuery}
-                  onChange={handleSearchChange} />
+                  onChange={handleSearchChange}
+                />
                 <ul className="searchUl">
-                  {searchResults.map((item) => {
-                    return (
-                      <>
-                        <li key={item.key}>{item.name}</li>
-                      </>
-                    )
-                  })}
+                  {searchResults.map((item) => (
+                    <li className="searchCoins" key={item.key} onClick={() => getCoinName(item)}>
+                      <img className="searchCoinImg" src={`${item.coinName}.png`} />
+                      {item.coinName}</li>
+                  ))}
                 </ul>
               </div>
 
@@ -178,30 +151,15 @@ const FavoriteCoins = () => {
                     onChange={handlePriceInput} />
                 </div>
 
-                <div className="orderPriceDiv">
-                  <div className="ordersHeaderDiv">
-                    <span className="orderPriceHeader">enter your desired market cap</span>
-                  </div>
-                  <input
-                    className="getOrderPrice"
-                    type="text"
-                    disabled={disableMarket === true ? true : false}
-                    onChange={handleMarketInput} />
-                </div>
 
-                <div className="orderPriceDiv">
-                  <div className="ordersHeaderDiv">
-                    <span className="orderPriceHeader">enter your desired change</span>
-                  </div>
-                  <input
-                    className="getOrderPrice"
-                    type="text"
-                    disabled={disableChange === true ? true : false}
-                    onChange={handleChangeInput} />
-                </div>
+
+
 
                 <div className="orderBtnDiv">
-                  <button className="getOrderBtn" type="submit" onClick={getValue}>Register</button>
+                  <button className={submitBtn ? "getOrderBtnNone" : "getOrderBtn"} type="button" onClick={getValue}>Register</button>
+                  <span className={submitBtn ? "registerQ" : "getOrderBtnNone"}>Are you sure to place your order?</span>
+                  <button className={submitBtn ? "regYesBtn" : "regYesBtnNone"} type="submit">Yes</button>
+                  <button className={submitBtn ? "regNoBtn" : "regNoBtnNone"} type="button" onClick={noSubmitOrder}>NO</button>
                 </div>
               </form>
 
@@ -209,18 +167,23 @@ const FavoriteCoins = () => {
             </div>
 
             <div className="ordersCount">
+
               <span className="ordersHeader">
                 Your Orders
               </span>
               <div className="ordersDiv">
-                <div className="orderDiv">
-                  <span className="orderCoinName">
-                    ethereum
-                  </span>
-                  <span className="orderDes">
-                    Market Cap : 235634563736745676
-                  </span>
-                </div>
+                {orderDatas.map((item) => {
+                  return (
+                    <div className="orderDiv">
+                      <span className="orderCoinName">
+                        {item.orderName}
+                      </span>
+                      <span className="orderDes">
+                        price : {item.orderPrice}
+                      </span>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>

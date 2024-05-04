@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   namee: [],
-  coin: []
+  coin: [],
+  ordersData: []
 };
 
 const notesData = createSlice({
@@ -18,9 +19,12 @@ const notesData = createSlice({
 
     addCoin: (state, action) => {
       state.coin.push(action.payload.coin)
+    },
+    addOrder: (state, action) =>{
+      state.ordersData = action.payload.order
     }
   }
 });
 
-export const { add1, deleteNote, addCoin } = notesData.actions;
+export const { add1, deleteNote, addCoin, addOrder } = notesData.actions;
 export default notesData.reducer;
