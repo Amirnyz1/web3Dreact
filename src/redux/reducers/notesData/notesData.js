@@ -21,10 +21,13 @@ const notesData = createSlice({
       state.coin.push(action.payload.coin)
     },
     addOrder: (state, action) =>{
-      state.ordersData = action.payload.order
+      state.ordersData.push(action.payload.order)
+    },
+    deleteOrder : (state,action) => {
+      state.ordersData = state.ordersData.filter(order => order.key !== action.payload.key)
     }
   }
 });
 
-export const { add1, deleteNote, addCoin, addOrder } = notesData.actions;
+export const { add1, deleteNote, addCoin, addOrder, deleteOrder } = notesData.actions;
 export default notesData.reducer;

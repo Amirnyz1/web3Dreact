@@ -299,7 +299,18 @@
 .orderDiv {
     width: 90%;
     padding: 0.5rem 0 0.5rem 0.5rem;
-    display: flex;
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    background-color: #26c492;
+    border: 1px solid #26c492;
+    border-radius: 12px;
+}
+
+.sendedOrderDiv{
+    width: 90%;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+    display: inline-flex;
     flex-direction: column;
     row-gap: 0.5rem;
     background-color: #0a1426;
@@ -307,10 +318,25 @@
     border-radius: 12px;
 }
 
+
+
 .orderCoinName {
     font-size: 1.1rem;
     font-family: roboto;
     color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.5rem 0 0;
+}
+
+.orderDeleteIcon {
+    font-size: 1.2rem;
+    color: red;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    text-align: right;
 }
 
 .searchUl {

@@ -35,9 +35,6 @@ function CryptoPrice() {
         setSortingMode(btnNum);
     }
 
-   
-
-
     function sortData(data, mode) {
         const coinsArray = Object.entries(data);
         if (mode === 1) {

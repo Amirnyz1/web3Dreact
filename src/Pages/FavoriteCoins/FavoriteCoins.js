@@ -3,8 +3,10 @@ import Footer from "../../components/Footer/Footer"
 import Dashboard from "../../components/Dashboard/Dashboard"
 import { UseSelector, useDispatch, useSelector } from "react-redux"
 import "./FavoriteCoins.css"
-import { useState } from "react"
-import { addOrder } from "../../redux/reducers/notesData/notesData"
+import { useState, useRef, useEffect } from "react"
+import { TiDeleteOutline } from "react-icons/ti";
+import emailjs from 'emailjs-com';
+import { addOrder, deleteOrder } from "../../redux/reducers/notesData/notesData"
 
 const FavoriteCoins = () => {
 
@@ -17,9 +19,8 @@ const FavoriteCoins = () => {
 
   // Get coins data from Redux state
   const coinsData = useSelector((state) => state.data.coinsDatas);
-  console.log(coinsData)
   // Function to handle search input change 
-  
+
   const handleSearchChange = (event) => {
     const { value } = event.target;
     setSearchQuery(value);
@@ -47,27 +48,22 @@ const FavoriteCoins = () => {
   const [submitBtn, setSubmitBtn] = useState(false);
   const [registerBtn, setRegisterBtn] = useState(true);
   const [orderD, setOrderD] = useState([])
+  const [orderSended, setOrderSended] = useState(false)
 
   const handlePriceInput = (event) => {
     const { value } = event.target;
     setPriceValue(value);
-    setLastValue(parseFloat(priceValue))
+    setLastValue(+priceValue)
   };
 
   function getValue() {
     setSubmitBtn(true);
     setRegisterBtn(false)
-    setOrderD(prevOrder => [...prevOrder, {
+    setOrderD( {
+      key : Date.now(),
       orderName: searchQuery,
-      orderPrice: priceValue
-    }])
-  }
-
-  function getDatas(e) {
-    e.preventDefault();
-    dispatch(addOrder({ order: orderD }))
-    setSubmitBtn(false);
-    setRegisterBtn(true)
+      orderPrice: lastValue
+    })
   }
 
   function getCoinName(item) {
@@ -79,6 +75,63 @@ const FavoriteCoins = () => {
   }
 
 
+  // Create a ref for the form
+  const formRef = useRef();
+
+  // Function to send the email
+  const sendEmailProposal = (e) => {
+    e.preventDefault();
+    dispatch(addOrder({ order: orderD }))
+    setSubmitBtn(false);
+    setRegisterBtn(true)
+  };
+
+
+
+  useEffect(() => {
+    // Call your function here whenever coinsData changes
+    compareArrays(coinsData);
+  }, [coinsData]);
+
+  function compareArrays() {
+    orderDatas.forEach((item1) => {
+      coinsData.forEach((item2) => {
+        if (item1.orderName === item2.coinName && item1.orderPrice === item2.price) {
+          const serviceId = 'service_00mnpyn';
+          const templateId = 'template_u592nuz';
+          const userId = 'RodsZ_VftAF_0Cjb5';
+          const testt = "amirreza"
+
+          // Send the form data using emailjs
+          console.log(formRef.current)
+          emailjs
+            .sendForm(serviceId, templateId, formRef.current, userId, testt) 
+            .then(
+              (result) => {
+                console.log(result.text);
+                // Optionally, reset the form after successful submission
+                formRef.current.reset();
+              },
+              (error) => {
+                console.log(error.text);
+              }
+            );
+          console.log("senEmail")
+          dispatch(deleteOrder({ key : item1.key }));
+        } else {
+          console.log("dont send email")
+        }
+      })
+    })
+  }
+
+
+  function handleOrderDeleteIcon(key){
+    dispatch(deleteOrder({ key }));
+  }
+
+
+  console.log(orderDatas)
   return (
     <>
       <div className="favoriteCoontainer">
@@ -104,7 +157,7 @@ const FavoriteCoins = () => {
                 </div>
                 {coinDatas.map((item) => {
                   return (
-                    <div className="favoriteCoin" key={item.key}>
+                    <div className="favoriteCoin" key={item.key} >
                       <div className="favoriteCoinNameDiv">
                         <img className="favoriteCoinImg" src={`${item.coinName}.png`} />
                         <span className="favoriteHeaderPrice">{item.coinName}</span>
@@ -120,7 +173,7 @@ const FavoriteCoins = () => {
               </div>
             </div>
 
-            <div className="orderCount">
+            <form className="orderCount" ref={formRef} onSubmit={sendEmailProposal}>
               <div className="orderCoinNameDiv">
                 <div className="ordersHeaderDiv">
                   <span className="orderCoinNameHeader">place your order</span>
@@ -129,6 +182,7 @@ const FavoriteCoins = () => {
                   className="getOrderCoinName"
                   value={searchQuery}
                   onChange={handleSearchChange}
+                  name="coinName"
                 />
                 <ul className="searchUl">
                   {searchResults.map((item) => (
@@ -139,7 +193,7 @@ const FavoriteCoins = () => {
                 </ul>
               </div>
 
-              <form className="notifFrom" id="form" onSubmit={getDatas}>
+              <div className="notifFrom" id="form" >
                 <div className="orderPriceDiv">
                   <div className="ordersHeaderDiv">
                     <span className="orderPriceHeader">enter your desired price</span>
@@ -148,12 +202,9 @@ const FavoriteCoins = () => {
                     className="getOrderPrice"
                     type="text"
                     disabled={disablePrice === true ? true : false}
+                    name="orderPrice"
                     onChange={handlePriceInput} />
                 </div>
-
-
-
-
 
                 <div className="orderBtnDiv">
                   <button className={submitBtn ? "getOrderBtnNone" : "getOrderBtn"} type="button" onClick={getValue}>Register</button>
@@ -161,10 +212,10 @@ const FavoriteCoins = () => {
                   <button className={submitBtn ? "regYesBtn" : "regYesBtnNone"} type="submit">Yes</button>
                   <button className={submitBtn ? "regNoBtn" : "regNoBtnNone"} type="button" onClick={noSubmitOrder}>NO</button>
                 </div>
-              </form>
+              </div>
 
 
-            </div>
+            </form>
 
             <div className="ordersCount">
 
@@ -174,9 +225,11 @@ const FavoriteCoins = () => {
               <div className="ordersDiv">
                 {orderDatas.map((item) => {
                   return (
-                    <div className="orderDiv">
+                    <div className={orderSended ? "sendedOrderDiv" : "orderDiv"}>
+                    
                       <span className="orderCoinName">
                         {item.orderName}
+                        <TiDeleteOutline className="orderDeleteIcon" onClick={()=> handleOrderDeleteIcon(item.key)} />
                       </span>
                       <span className="orderDes">
                         price : {item.orderPrice}
@@ -199,64 +252,3 @@ export default FavoriteCoins
 
 
 
-/*
-import React, { useState } from 'react';
-
-function CoinForm() {
-  const [coins, setCoins] = useState([
-    {
-      name: "bitcoin",
-      usd: 3309457,
-      market: 930675340,
-      Changes: 9057349856
-    },
-    {
-      name: "ethereum",
-      usd: 3309457,
-      market: 930675340,
-      Changes: 9057349856
-    },
-    {
-      name: "tether",
-      usd: 3309457,
-      market: 930675340,
-      Changes: 9057349856
-    },
-    {
-      name: "bnb",
-      usd: 3309457,
-      market: 930675340,
-      Changes: 9057349856
-    }
-  ]);
-
-  const handleInputChange = (index, event) => {
-    const { name, value } = event.target;
-    const newCoins = [...coins];
-    newCoins[index][name] = value;
-    setCoins(newCoins);
-  };
-
-  return (
-    <div>
-      {coins.map((coin, index) => (
-        <div key={index}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter coin name"
-            value={coin.name}
-            onChange={(e) => handleInputChange(index, e)}
-          />
-          <p>USD: {coin.usd}</p>
-          <p>Market: {coin.market}</p>
-          <p>Changes: {coin.Changes}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export default CoinForm;
-
-*/

@@ -9,5 +9,5 @@ const combinedReducers = combineReducers({
     noteD : notesData,
 })
 
-const persistedReducers = persistReducer({key:'rootPersistor',storage,whitelist:['data']},combinedReducers)
+const persistedReducers = persistReducer({key:'rootPersistor',storage,whitelist:['data','noteD']},combinedReducers)
 export default persistedReducers
