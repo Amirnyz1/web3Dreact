@@ -59,7 +59,6 @@ const Header = () => {
                 <Link to='/cryptoPrice'>
                     <span className='option'>Crypto Price</span>
                 </Link>
-
                 <span className='option'>tweets</span>
             </div>
             <div className='headerBtnDiv'>

@@ -1,6 +1,5 @@
 import Header from "../../components/Header/Header"
 import Footer from "../../components/Footer/Footer"
-import Dashboard from "../../components/Dashboard/Dashboard"
 import { useDispatch, useSelector } from "react-redux"
 import { add1 } from "../../redux/reducers/notesData/notesData"
 import { deleteNote } from "../../redux/reducers/notesData/notesData"

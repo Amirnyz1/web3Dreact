@@ -3,12 +3,10 @@ import { GiNotebook } from "react-icons/gi";
 import { MdFavorite } from "react-icons/md";
 import { FaWallet } from "react-icons/fa";
 import { AiOutlineTransaction } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import './Dashboard.css'
-import { clickProfile } from "../../redux/reducers/dataReducer/dataReducer";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { add1 } from "../../redux/reducers/notesData/notesData";
 
 
 const Dashboard = () => {
@@ -63,10 +61,12 @@ const Dashboard = () => {
                         <span className='options'>Favorite Coins</span>
                     </li>
                 </Link>
-                <li className={`profileOption ${activeOption === 'wallet' && 'active'}`} onClick={() => handleClick('wallet')}>
-                    <FaWallet className="profileIcons" />
-                    <span className='options'>Wallet</span>
-                </li>
+                <Link to='/wallet'>
+                    <li className={`profileOption ${activeOption === 'wallet' && 'active'}`} onClick={() => handleClick('wallet')}>
+                        <FaWallet className="profileIcons" />
+                        <span className='options'>Wallet</span>
+                    </li>
+                </Link>
                 <li className={`profileOption ${activeOption === 'transactions' && 'active'}`} onClick={() => handleClick('transactions')}>
                     <AiOutlineTransaction className="profileIcons" />
                     <span className='options'>Transactions</span>

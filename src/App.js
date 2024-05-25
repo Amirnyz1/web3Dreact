@@ -8,6 +8,8 @@ import { persistore, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import FavoriteCoins from './Pages/FavoriteCoins/FavoriteCoins';
 import Notes from './Pages/Notes/Notes';
+
+import Wallet from './Pages/Wallet/Wallet';
 import './App.css';
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
           <Route path='/Profile' element={<Profile/>}/>
           <Route path='/Notes' element={<Notes/>}/>
           <Route path='/FavoriteCoins' element={<FavoriteCoins/>} />
+          <Route path='/wallet' element={<Wallet/>}/>
         </Routes>
       </PersistGate>
     </Provider>

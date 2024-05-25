@@ -3,6 +3,7 @@ import { LuInstagram } from "react-icons/lu";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { TiSocialTwitter } from "react-icons/ti";
 import './Footer.css'
+import { Link } from "react-router-dom";
 
 
 const Footer = () => {
@@ -21,14 +22,16 @@ const Footer = () => {
                 <div className='footerMenu'>
                     <span className='menuOption'>Notes</span>
                     <span className='menuOption'>Favorite Cryptos</span>
-                    <span className='menuOption'>Wallet</span>
+                    <Link to='/wallet'>
+                        <span className='menuOption'>Wallet</span>
+                    </Link>
                     <span className='menuOption'>Profile</span>
                 </div>
 
                 <div className='footerEmailDiv1'>
                     <span className='footerEmailTxt'>Enter Your Email Address</span>
                     <div className='footerEmailDiv'>
-                        <input type='email' name='footerEmailInput' placeholder='Email Address'  className="footerEmailInput"/>
+                        <input type='email' name='footerEmailInput' placeholder='Email Address' className="footerEmailInput" />
                         <button className='footerBtn'>Send</button>
                     </div>
                 </div>
